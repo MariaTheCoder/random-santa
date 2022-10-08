@@ -1,12 +1,10 @@
-import { useState } from "react";
 import "./App.css";
+import AddParticipant from "./Components/AddParticipant";
 
 export default function App() {
-  const [name, setName] = useState("");
-
   return (
     <div className="App">
-      <input onChange={(event) => setName(event.target.value)}></input>
+      <AddParticipant />
     </div>
   );
 }
