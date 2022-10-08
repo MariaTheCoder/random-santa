@@ -11,7 +11,7 @@ export default function App() {
     <div className="App">
       <AddParticipant list={list} setList={setList} />
       <Participants list={list} />
-      <AssignSecretSanta />
+      <AssignSecretSanta list={list} />
     </div>
   );
 }
