@@ -1,20 +1,28 @@
 import { useState } from "react";
 
 export default function AddParticipant(props) {
-  const [name, setName] = useState("");
+  const [participant, setParticipant] = useState({ name: "", secretSanta: "" });
+
+  function changeHandler(event) {
+    const participantCopy = { ...participant };
+    participantCopy.name = event.target.value;
+    setParticipant(participantCopy);
+  }
 
   function clickHandler() {
     const listCopy = [...props.list];
-    listCopy.push(name);
+    listCopy.push(participant);
     props.setList(listCopy);
-    setName("");
+    setParticipant({ name: "", secretSanta: "" });
   }
 
   return (
     <div className="AddParticipant">
       <input
-        value={name}
-        onChange={(event) => setName(event.target.value)}
+        value={participant.name}
+        onChange={(event) => {
+          changeHandler(event);
+        }}
       ></input>
       <button onClick={clickHandler}>Add to list</button>
     </div>
