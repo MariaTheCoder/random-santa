@@ -7,11 +7,15 @@ export default function AddParticipant(props) {
     const listCopy = [...props.list];
     listCopy.push(name);
     props.setList(listCopy);
+    setName("");
   }
 
   return (
     <div className="AddParticipant">
-      <input onChange={(event) => setName(event.target.value)}></input>
+      <input
+        value={name}
+        onChange={(event) => setName(event.target.value)}
+      ></input>
       <button onClick={clickHandler}>Add to list</button>
     </div>
   );
