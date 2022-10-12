@@ -1,32 +1,35 @@
-import { useEffect, useState } from "react";
-
 export default function AssignSecretSanta(props) {
-  const [secretSantas, setSecretSantas] = useState([]);
-  const [test, setTest] = useState([]);
-  console.log("secretSantas: ", secretSantas);
-  console.log("test: ", test);
+  function clickHandler() {
+    const participantsList = [...props.list];
+    const randomOrder = [];
+    const numberOfParticipants = props.list.length;
 
-  useEffect(() => {
-    setSecretSantas(props.list);
-  }, [props.list]);
+    while (participantsList.length) {
+      let randomIndex = Math.floor(Math.random() * numberOfParticipants);
 
-  useEffect(() => {
-    const newArray = [];
+      while (randomOrder[randomIndex]) {
+        randomIndex = Math.floor(Math.random() * numberOfParticipants);
+      }
 
-    while (newArray.length < props.list.length) {
-      const randomInt = Math.floor(Math.random() * props.list.length);
-      newArray.push(randomInt);
+      randomOrder[randomIndex] = participantsList.shift();
     }
 
-    setTest(newArray);
-  }, [props.list]);
+    for (let i = 0; i < randomOrder.length; i++) {
+      if (i === randomOrder.length - 1) {
+        randomOrder[i].secretSanta = randomOrder[0].name;
+        continue;
+      }
+      randomOrder[i].secretSanta = randomOrder[i + 1].name;
+    }
+    props.setList(randomOrder);
+  }
 
   return (
     <div className="AssignSecretSanta">
-      <button>Assign Secret Santa</button>
+      <button onClick={clickHandler}>Assign Secret Santa</button>
       <div>
         {props.list.length > 0
-          ? `${test[0]}`
+          ? `${props.list[0].secretSanta}`
           : "Secret Santas can not be assigned"}
       </div>
     </div>
