@@ -1,3 +1,5 @@
+import ListSecretSantas from "./ListSecretSantas";
+
 export default function AssignSecretSanta(props) {
   function clickHandler() {
     const participantsList = [...props.list];
@@ -28,9 +30,11 @@ export default function AssignSecretSanta(props) {
     <div className="AssignSecretSanta">
       <button onClick={clickHandler}>Assign Secret Santa</button>
       <div>
-        {props.list.length > 0
-          ? `${props.list[0].secretSanta}`
-          : "Secret Santas can not be assigned"}
+        {props.list.length > 0 ? (
+          <ListSecretSantas list={props.list} />
+        ) : (
+          "Secret Santas can not be assigned"
+        )}
       </div>
     </div>
   );

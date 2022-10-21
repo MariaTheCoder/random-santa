@@ -6,6 +6,7 @@ import AssignSecretSanta from "./Components/AssignSecretSanta";
 
 export default function App() {
   const [list, setList] = useState([]);
+  console.log("list: ", list);
 
   return (
     <div className="App">
