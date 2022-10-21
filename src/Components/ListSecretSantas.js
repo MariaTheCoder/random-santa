@@ -7,7 +7,7 @@ export default function ListSecretSantas(props) {
     let match = 0;
 
     props.list.forEach((participant) => {
-      if (participant.name === name) match++;
+      if (participant.name.toLowerCase() === name.toLocaleLowerCase()) match++;
     });
 
     if (match === 0) {
@@ -15,7 +15,7 @@ export default function ListSecretSantas(props) {
     }
 
     if (match > 1) {
-      alert("Avoid giving participants the exact same names");
+      alert("Avoid giving participants the same name");
     }
   }
 
