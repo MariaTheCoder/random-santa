@@ -1,6 +1,9 @@
+import { useState } from "react";
 import ListSecretSantas from "./ListSecretSantas";
 
 export default function AssignSecretSanta(props) {
+  const [areSantasAssigned, setAreSantasAssigned] = useState(false);
+
   function clickHandler() {
     const participantsList = [...props.list];
     const randomOrder = [];
@@ -24,17 +27,21 @@ export default function AssignSecretSanta(props) {
       randomOrder[i].secretSanta = randomOrder[i + 1].name;
     }
     props.setList(randomOrder);
+    setAreSantasAssigned(true);
   }
 
   return (
     <div className="AssignSecretSanta">
-      <button onClick={clickHandler}>Assign Secret Santa</button>
+      {areSantasAssigned ? (
+        <button disabled onClick={clickHandler}>
+          Assign Secret Santa
+        </button>
+      ) : (
+        <button onClick={clickHandler}>Assign Secret Santa</button>
+      )}
       <div>
-        {props.list.length > 0 ? (
-          <ListSecretSantas list={props.list} />
-        ) : (
-          "Secret Santas can not be assigned"
-        )}
+        {props.list.length > 0 ? null : "Secret Santas can not be assigned"}
+        {areSantasAssigned ? <ListSecretSantas list={props.list} /> : null}
       </div>
     </div>
   );
