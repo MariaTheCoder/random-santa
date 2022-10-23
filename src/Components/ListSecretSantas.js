@@ -14,9 +14,9 @@ export default function ListSecretSantas(props) {
       alert("No matches found");
     }
 
-    if (match > 1) {
-      alert("Avoid giving participants the same name");
-    }
+    // if (match > 1) {
+    //   alert("Avoid giving participants the same name");
+    // }
   }
 
   const sortedList = props.list.sort((a, b) => {
