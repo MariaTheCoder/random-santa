@@ -11,9 +11,22 @@ export default function AddParticipant(props) {
 
   function clickHandler() {
     const listCopy = [...props.list];
+
+    if (matchFound(participant.name)) return alert("Name already taken");
+
     listCopy.push(participant);
     props.setList(listCopy);
     setParticipant({ name: "", secretSanta: "" });
+  }
+
+  function matchFound(inputValue) {
+    let matchFound = false;
+
+    props.list.forEach((p) => {
+      if (p.name.toLowerCase() === inputValue.toLowerCase()) matchFound = true;
+    });
+
+    return matchFound;
   }
 
   return (
