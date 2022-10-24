@@ -2,12 +2,22 @@ import { useState } from "react";
 
 export default function ListSecretSantas(props) {
   const [name, setName] = useState("");
+  const [secretSanta, setSecretSanta] = useState("");
+  const [isClicked, setIsClicked] = useState(false);
+
+  function clickHandler() {
+    findSecretSanta();
+    setIsClicked(true);
+  }
 
   function findSecretSanta() {
     let match = 0;
 
     props.list.forEach((participant) => {
-      if (participant.name.toLowerCase() === name.toLocaleLowerCase()) match++;
+      if (participant.name.toLowerCase() === name.toLocaleLowerCase()) {
+        match++;
+        setSecretSanta(participant.secretSanta);
+      }
     });
 
     if (match === 0) {
@@ -31,7 +41,6 @@ export default function ListSecretSantas(props) {
     }
     return 0;
   });
-  console.log("sorted: ", sortedList);
 
   return (
     <div>
@@ -40,7 +49,10 @@ export default function ListSecretSantas(props) {
           setName(event.target.value);
         }}
       />
-      <button onClick={findSecretSanta}>Display secret Santa</button>
+      <button onClick={clickHandler}>Display secret Santa</button>
+      {isClicked ? (
+        <div>You are the Secret Santa for particpant: {secretSanta}</div>
+      ) : null}
     </div>
   );
 }
